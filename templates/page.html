@@ -3,33 +3,34 @@
 {% block title %} {{ page.title }} - {{ config.title }} {% endblock title %}
 
 {% block content%}
-<article class="prose prose-stone prose-h1:font-normal prose-h2:font-normal prose-h3:font-semibold">
-  <h1 class="mb-4 mt-4">{{ page.title }}</h1>
-  <span class="text-gray-500">{{ page.date }}</span>
-  <div>{{ page.content | safe }}</div>
-</article>
-<div class="flex flex-col gap-4 mt-8">
-  {% if page.taxonomies.tags %}
-  <div class="flex flex-wrap gap-2 items-center">
-    标签：
-    {% for tag in page.taxonomies.tags %}
-      <span class="border px-1 ">{{ tag }}</span>
-    {% endfor %}
-  </div>
-  {% endif %}
-  {% if page.taxonomies.type %}
-  <div class="flex flex-wrap gap-2 items-center">
-    分类：
-    {% for type in page.taxonomies.type %}
-      <span class="border-b">{{ type }}</span>
-    {% endfor %}
-  </div>
-  {% endif %}
-  <a href="/">
-    <span class="hover:border-b">
-      🔙 Back to Home
-    </span>
-  </a>
-</div>
+<article class="prose prose-stone max-w-none prose-h1:font-bold prose-h1:text-3xl md:prose-lg">
 
+  {# Article Header #}
+  <header class="mb-8">
+      <h1 class="mb-2 !text-4xl">{{ page.title }}</h1>
+      <p class="text-stone-500 text-base mt-0">
+        Published on {{ page.date | date(format="%B %e, %Y") }}
+      </p>
+  </header>
+
+  {# Article Body #}
+  {{ page.content | safe }}
+
+  {# Article Footer #}
+  <footer class="mt-12 pt-6 border-t border-stone-200 not-prose">
+    {% if page.taxonomies.tags %}
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <span class="text-sm font-semibold text-stone-700">Tagged in:</span>
+        {% for tag in page.taxonomies.tags %}
+          <a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}" class="text-sm bg-stone-200/50 text-stone-700 px-2 py-1 rounded-md hover:bg-stone-200 transition-colors duration-200">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="mt-8">
+        <a href="{{ config.base_url | safe }}" class="text-stone-600 hover:text-mist-600 no-underline">&larr; Back to all posts</a>
+    </div>
+  </footer>
+
+</article>
 {% endblock %}

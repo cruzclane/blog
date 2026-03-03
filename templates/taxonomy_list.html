@@ -1,17 +1,20 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+
+{% block title %}All {{ taxonomy.name | title }} - {{ config.title }}{% endblock title %}
 
 {% block content %}
-<div id="content">
-    <div class="hero">
-        <h1>{{ taxonomy.name | title }}</h1>
-        <p style="color: var(--text-secondary); margin-top: 1rem;">
-            {% if taxonomy.name == "tags" %}
-            All blog tags
-            {% elif taxonomy.name == "type" %}
-            Blog categories
-            {% endif %}
-        </p>
-    </div>
-
+<div class="mb-12">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold text-stone-700">All {{ taxonomy.name | title }}</h1>
+    <p class="text-stone-500 mt-2">A list of all available terms for the '{{taxonomy.name}}' taxonomy.</p>
+  </header>
+  <div class="flex flex-wrap gap-3">
+    {% for term in terms %}
+      <a href="{{ term.permalink | safe }}" class="block px-3 py-2 rounded-md bg-stone-200/50 hover:bg-stone-200 transition-colors duration-200 no-underline">
+        <span class="font-semibold text-stone-700">{{ term.name }}</span>
+        <span class="ml-2 text-sm text-stone-500">({{ term.pages | length }})</span>
+      </a>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %}

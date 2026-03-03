@@ -1,43 +1,58 @@
-{% extends "base.html" %} {% block content %} 
-{# Posts #} 
-{% set section = get_section(path="posts/_index.md") %} 
-<h1 class="text-stone-600">{{ section.title }}</h1>
-<ul>
-  {% for page in section.pages %}
-  <li class="list-disc text-stone-800">
-    <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
-    <span class="text-stone-600 text-sm">{{page.date}}</span>
-  </li>
-  {% endfor %}
-</ul>
+{% extends "base.html" %} 
 
-{# Books #} 
-<section class="mt-8">
-  {% set section = get_section(path="books/_index.md") %} 
-  <h1 class="text-stone-600">{{ section.title }}</h1>
-  <ul>
+{% block content %}
+
+{# Posts Section #}
+<section class="mb-12">
+  {% set section = get_section(path="posts/_index.md") %}
+  <h2 class="text-2xl font-bold text-stone-700 mb-6 border-b-2 border-stone-200 pb-2">{{ section.title }}</h2>
+  <div class="flex flex-col gap-4">
     {% for page in section.pages %}
-    <li class="list-disc text-stone-800">
-      <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
-      <span class="text-stone-600 text-sm">{{page.date}}</span>
-      <p class="text-stone-600 text-sm">{{ page.summary | safe}}</p>
-    </li>
+      <a href="{{ page.permalink }}" class="block p-4 -mx-4 rounded-lg">
+        <div class="flex justify-between items-baseline">
+          <h3 class="text-lg font-semibold text-stone-800 hover:underline hover:text-mist-600 underline-offset-4">{{ page.title }}</h3>
+          <p class="text-sm text-stone-500 shrink-0 ml-4">{{ page.date | date(format="%Y-%m-%d") }}</p>
+        </div>
+      </a>
     {% endfor %}
-  </ul>
+  </div>
 </section>
 
-{# Projects #} 
-<section class="mt-8">
-  {% set section = get_section(path="projects/_index.md") %} 
-  <h1 class="text-stone-600">{{ section.title }}</h1>
-  <ul>
+{# Books Section #}
+<section class="mb-12">
+  {% set section = get_section(path="books/_index.md") %}
+  <h2 class="text-2xl font-bold text-stone-700 mb-6 border-b-2 border-stone-200 pb-2">{{ section.title }}</h2>
+  <div class="flex flex-col gap-6">
     {% for page in section.pages %}
-    <li class="list-disc text-stone-800">
-      <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
-      <span class="text-stone-600 text-sm">{{page.date}}</span>
-    </li>
+    <a href="{{ page.permalink }}" class="block p-4 -mx-4 rounded-lg">
+      <div class="flex justify-between items-baseline">
+        <h3 class="text-lg font-semibold text-stone-800 hover:underline hover:text-mist-600 underline-offset-4">{{ page.title }}</h3>
+        <p class="text-sm text-stone-500 shrink-0 ml-4">{{ page.date | date(format="%Y-%m-%d") }}</p>
+      </div>
+      {% if page.summary %}
+      <div class="prose prose-sm prose-stone mt-2 text-stone-600">
+        {{ page.summary | safe }}
+      </div>
+      {% endif %}
+    </a>
     {% endfor %}
-  </ul>
+  </div>
+</section>
+
+{# Projects Section #}
+<section class="mb-12">
+  {% set section = get_section(path="projects/_index.md") %}
+  <h2 class="text-2xl font-bold text-stone-700 mb-6 border-b-2 border-stone-200 pb-2">{{ section.title }}</h2>
+  <div class="flex flex-col gap-4">
+    {% for page in section.pages %}
+    <a href="{{ page.permalink }}" class="block p-4 -mx-4 rounded-lg">
+      <div class="flex justify-between items-baseline">
+        <h3 class="text-lg font-semibold text-stone-800 hover:underline hover:text-mist-600 underline-offset-4">{{ page.title }}</h3>
+        <p class="text-sm text-stone-500 shrink-0 ml-4">{{ page.date | date(format="%Y-%m-%d") }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>
 
 {% endblock %}
