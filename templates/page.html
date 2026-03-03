@@ -1,9 +1,35 @@
-{% extends "base.html" %} {% import "macros.html" as macros %} {% block
-content%}
-<article>
-  <h1>{{ page.title }}</h1>
-  <p class="gray">发布日期: {{ page.date }}</p>
-  <p>{{ page.content | safe}}</p>
+{% extends "base.html" %} 
+
+{% block title %} {{ page.title }} - {{ config.title }} {% endblock title %}
+
+{% block content%}
+<article class="prose prose-stone prose-h1:font-normal prose-h2:font-normal prose-h3:font-semibold">
+  <h1 class="mb-4 mt-4">{{ page.title }}</h1>
+  <span class="text-gray-500">{{ page.date }}</span>
+  <div>{{ page.content | safe }}</div>
 </article>
-<a class="btn-home" href="/">Back to Home</a>
+<div class="flex flex-col gap-4 mt-8">
+  {% if page.taxonomies.tags %}
+  <div class="flex flex-wrap gap-2 items-center">
+    标签：
+    {% for tag in page.taxonomies.tags %}
+      <span class="border px-1 ">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if page.taxonomies.type %}
+  <div class="flex flex-wrap gap-2 items-center">
+    分类：
+    {% for type in page.taxonomies.type %}
+      <span class="border-b">{{ type }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <a href="/">
+    <span class="hover:border-b">
+      🔙 Back to Home
+    </span>
+  </a>
+</div>
+
 {% endblock %}

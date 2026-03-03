@@ -1,5 +1,5 @@
 ---
 template: posts.section.html
-title: 'Posts'
+title: Books
 sort_by: date
 ---

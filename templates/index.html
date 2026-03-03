@@ -1,18 +1,43 @@
-{% extends "base.html" %} {% block content %}
-<h1 class="gray">Posts</h1>
-{% set posts = get_section(path="posts/_index.md") %}
+{% extends "base.html" %} {% block content %} 
+{# Posts #} 
+{% set section = get_section(path="posts/_index.md") %} 
+<h1 class="text-stone-600">{{ section.title }}</h1>
 <ul>
-  {% for page in posts.pages %}
-  <li class="">
-    <a href="{{ page.permalink }}">{{ page.title }}</a>
-    <span class="gray text-sm">{{page.date}}</span>
-    {% if page.summary == '' %}
-    <div class="summary">
-      <p>{{page.summary | safe}}</p>
-      <a href="{{ page.permalink }}">Read more</a>
-    </div>
-    {% endif %}
+  {% for page in section.pages %}
+  <li class="list-disc text-stone-800">
+    <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
+    <span class="text-stone-600 text-sm">{{page.date}}</span>
   </li>
   {% endfor %}
 </ul>
+
+{# Books #} 
+<section class="mt-8">
+  {% set section = get_section(path="books/_index.md") %} 
+  <h1 class="text-stone-600">{{ section.title }}</h1>
+  <ul>
+    {% for page in section.pages %}
+    <li class="list-disc text-stone-800">
+      <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
+      <span class="text-stone-600 text-sm">{{page.date}}</span>
+      <p class="text-stone-600 text-sm">{{ page.summary | safe}}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{# Projects #} 
+<section class="mt-8">
+  {% set section = get_section(path="projects/_index.md") %} 
+  <h1 class="text-stone-600">{{ section.title }}</h1>
+  <ul>
+    {% for page in section.pages %}
+    <li class="list-disc text-stone-800">
+      <a class="border-b" href="{{ page.permalink }}">{{ page.title }}</a>
+      <span class="text-stone-600 text-sm">{{page.date}}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
 {% endblock %}

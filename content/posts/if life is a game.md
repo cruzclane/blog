@@ -1,6 +1,11 @@
 ---
 title: 如果人生是一场游戏
 date: 2024-08-03
+tags:
+  - game
+  - life
+type:
+  - article
 ---
 
 > 活着就是为了追求最大的游戏体验

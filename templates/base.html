@@ -4,10 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} {{ config.title }} {% endblock title %}</title>
-    {#
-    <link rel="stylesheet" href="https://unpkg.com/@knadh/oat/oat.min.css" />
-    <script src="https://unpkg.com/@knadh/oat/oat.min.js" defer></script>
-    #}
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="bg-amber-50 text-stone-800">
@@ -17,16 +13,11 @@
           <span class="text-stone-800">Clane's</span>
           <span class="text-mist-600 font-bold">Note</span>
         </a>
-        <nav class="flex justify-between">
-          <ul>
-            <li><a href="/blog">Blog</a></li>
-          </ul>
-        </nav>
       </header>
       <article class="flex-1">{% block content %} {% endblock %}</article>
       <footer class="text-center text-sm text-gray-500 pb-4">
         © 2026
-        <a class="hover:text-gray-800" href="{{config.base_url}}">
+        <a class="hover:text-gray-800 font-serif" href="{{config.base_url}}">
           <span class="">Clane's</span>
           <span class="">Note</span>
         </a>
