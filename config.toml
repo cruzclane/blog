@@ -1,6 +1,6 @@
 # The URL the site will be built for
 title = "Clane's Notes"
-base_url = "http://127.0.0.1:1111/"
+base_url = "https://cruzclane.github.io/blog/"
 description = "An area where to store my ideas and notes."
 
 # Whether to automatically compile all Sass files in the sass directory
